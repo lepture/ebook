@@ -4,8 +4,8 @@ import datetime
 
 
 class Entry(object):
-    def __init__(self, title, content, uid=None, author=None, category=None,
-                 created=None, url=None):
+    def __init__(self, title, content, uid=None, author=None,
+                 category='default', created=None, url=None):
         self.title = title
         self.content = content
         self.uid = uid or title
@@ -54,9 +54,8 @@ class Book(object):
     def categories(self):
         cats = {}
         for entry in self.entries:
-            if entry.category and entry.category not in cats:
+            if entry.category not in cats:
                 cats[entry.category] = Category(entry.category)
-
             cats[entry.category].append(entry)
 
-        return cats.itervalues()
+        return cats.values()

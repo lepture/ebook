@@ -16,6 +16,7 @@
       {% for cat in book.categories %}
       <navPoint id="category-{{cat.uid}}" class="section">
         <navLabel><text><![CDATA[{{cat.title|escape}}]]></text></navLabel>
+        <content src="content.html#category-{{cat.uid}}" />
         {% for entry in cat.entries %}
         <navPoint id="{{cat.uid}}-{{entry.uid}}" class="article">
           <navLabel><text><![CDATA[{{entry.title|escape}}]]></text></navLabel>

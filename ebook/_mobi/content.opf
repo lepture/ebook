@@ -16,10 +16,16 @@
       <output encoding="utf-8" content-type="application/x-mobipocket-subscription-magazine"></output>
     </x-metadata>
     {% endif %}
+    {% if book.cover %}
+    <meta name="cover" content="book-cover" />
+    {% endif %}
   </metadata>
   <manifest>
     <item id="content" media-type="application/xhtml+xml" href="content.html"></item>
     <item id="toc" media-type="application/x-dtbncx+xml" href="toc.ncx"></item>
+    {% if book.cover %}
+    <item id="book-cover" media-type="image/jepg" href="{{book.cover}}"></item>
+    {% endif %}
   </manifest>
 
   <spine toc="toc">

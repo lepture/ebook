@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>{{ book.title }}</title>
+    <style type="text/css">
+      #cover {
+        text-align: center;
+      }
+      #cover, .section {
+        page-break-after: always;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cover">
+      <h1>{{book.title}}</h1>
+      {% if book.image %}<img src="{{book.image}}" />{% endif %}
+    </div>
+    <div id="toc"></div>
+    <div id="content">
+      {% for entry in book.entries %}
+      <div id="entry-{{entry.uid}}" class="section">
+        <h2>{{entry.title}}</h2>
+        <div class="meta">{{entry.author|default("")}} {{entry.created|xmldatetime}}</div>
+        <div>{{entry.content}}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

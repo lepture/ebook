@@ -1,0 +1,3 @@
+recursive-include ebook/_mobi *.*
+recursive-include ebook/_epub *.*
+include README.rst

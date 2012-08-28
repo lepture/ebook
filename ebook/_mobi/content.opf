@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uid">
+  <metadata>
+    <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:title>{{book.title}}</dc:title>
+      <dc:language>{{book.lang}}</dc:language>
+      <dc:identifier id="uid">{{book.uid}}</dc:identifier>
+      <dc:creator>{{book.creator}}</dc:creator>
+      <dc:publisher>{{book.publisher}}</dc:publisher>
+      <dc:subject>{{book.subject}}</dc:subject>
+      <dc:date>{{ book.created|xmldatetime }}</dc:date>
+      <dc:description>{{book.description}}</dc:description>
+    </dc-metadata>
+    {% if book.format == 'periodical' %}
+    <x-metadata>
+      <output encoding="utf-8" content-type="application/x-mobipocket-subscription-magazine"></output>
+    </x-metadata>
+    {% endif %}
+  </metadata>
+  <manifest>
+    <item id="content" media-type="application/xhtml+xml" href="content.html"></item>
+    <item id="toc" media-type="application/x-dtbncx+xml" href="toc.ncx"></item>
+  </manifest>
+
+  <spine toc="toc">
+    <itemref idref="content"/>
+  </spine>
+
+  <guide>
+    <reference type="cover" title="cover" href="content.html#cover"></reference>
+    <reference type="toc" title="toc" href="content.html#toc"></reference>
+    <reference type="start" title="start" href="content.html#content"></reference>
+    <reference type="text" title="cover" href="content.html#cover"></reference>
+  </guide>
+</package>

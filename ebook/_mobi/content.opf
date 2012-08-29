@@ -36,6 +36,5 @@
     <reference type="cover" title="cover" href="content.html#cover"></reference>
     <reference type="toc" title="toc" href="content.html#toc"></reference>
     <reference type="start" title="start" href="content.html#content"></reference>
-    <reference type="text" title="cover" href="content.html#cover"></reference>
   </guide>
 </package>

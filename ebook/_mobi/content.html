@@ -15,7 +15,7 @@
   <body>
     <div id="cover">
       <h1>{{book.title}}</h1>
-      {% if book.image %}<img src="{{book.image}}" />{% endif %}
+      {% if book.description %}<p>{{book.description}}</p>{% endif %}
     </div>
     <ul id="toc">
       {% for entry in book.entries %}

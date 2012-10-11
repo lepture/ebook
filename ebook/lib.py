@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import re
 import datetime
 
 
@@ -7,12 +8,20 @@ class Entry(object):
     def __init__(self, title, content, uid=None, author=None,
                  category='default', created=None, url=None):
         self.title = title
+
         self.content = content
+
         self.uid = uid or title
         self.author = author or ''
         self.category = category
         self.created = created
         self.url = url
+
+    @property
+    def images(self):
+        pattern = re.compile(r'''src=('|")(\S+?)\1''')
+        for m in pattern.findall(self.content):
+            yield m[1]
 
 
 class Category(object):
@@ -59,3 +68,10 @@ class Book(object):
             cats[entry.category].append(entry)
 
         return cats.values()
+
+    @property
+    def images(self):
+        images = []
+        for entry in self.entries:
+            images.extend(entry.images)
+        return images

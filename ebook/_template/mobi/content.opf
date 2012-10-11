@@ -11,21 +11,24 @@
       <dc:date>{{ book.created|xmldatetime }}</dc:date>
       <dc:description>{{book.description}}</dc:description>
     </dc-metadata>
-    {% if book.periodical %}
+    {%- if book.periodical %}
     <x-metadata>
       <output encoding="utf-8" content-type="application/x-mobipocket-subscription-magazine"></output>
     </x-metadata>
-    {% endif %}
-    {% if book.cover %}
+    {%- endif %}
+    {%- if book.cover %}
     <meta name="cover" content="book-cover" />
-    {% endif %}
+    {%- endif %}
   </metadata>
   <manifest>
     <item id="content" media-type="application/xhtml+xml" href="content.html"></item>
     <item id="toc" media-type="application/x-dtbncx+xml" href="toc.ncx"></item>
-    {% if book.cover %}
-    <item id="book-cover" media-type="image/jepg" href="{{book.cover}}"></item>
-    {% endif %}
+    {%- if book.cover %}
+    <item id="book-cover" media-type="image/jpeg" href="{{book.cover}}"></item>
+    {%- endif %}
+    {%- for image in book.images %}
+    <item id="{{image|md5image}}" media-type="{{image|media_type}}" href="images/{{image|md5image}}"></item>
+    {%- endfor %}
   </manifest>
 
   <spine toc="toc">

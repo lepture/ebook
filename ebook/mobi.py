@@ -2,7 +2,7 @@
 
 import os
 import subprocess
-from utils import render
+from utils import render, download
 
 
 ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -17,6 +17,9 @@ def create(book, destination):
     folder = os.path.abspath(folder)
     if not os.path.isdir(folder):
         os.makedirs(folder)
+
+    # download images
+    download(book.images, os.path.join(folder, 'images'))
 
     # write content.html
     f = open(os.path.join(folder, 'content.html'), 'w')

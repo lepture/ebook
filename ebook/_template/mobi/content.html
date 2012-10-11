@@ -7,8 +7,18 @@
       #cover {
         text-align: center;
       }
-      #cover, #toc, .section {
+      #cover, #toc {
         page-break-after: always;
+      }
+      .section {
+        page-break-before: always;
+      }
+      .entry-title, .entry-meta {
+        text-align: center;
+      }
+      .entry-meta {
+        font-size: 10px;
+        margin-bottom: 24px;
       }
     </style>
   </head>
@@ -18,36 +28,36 @@
       {% if book.description %}<p>{{book.description}}</p>{% endif %}
     </div>
     <ul id="toc">
-      {% for entry in book.entries %}
+      {%- for entry in book.entries %}
       <li><a href="#entry-{{entry.uid}}">{{entry.title}}</a></li>
-      {% endfor %}
+      {%- endfor %}
     </ul>
     <div id="content">
-      {% if book.periodical %}
+      {%- if book.periodical %}
 
-      {% for cat in book.categories %}
+      {%- for cat in book.categories %}
       <div id="category-{{cat.uid}}">
-        {% for entry in cat.entries %}
+        {%- for entry in cat.entries %}
         <div id="entry-{{entry.uid}}" class="section">
-          <h2>{{entry.title}}</h2>
-          <div class="meta">{{entry.author|default("")}} {{entry.created|xmldatetime}}</div>
-          <div>{{entry.content}}</div>
+          <h2 class="entry-title">{{entry.title}}</h2>
+          <div class="entry-meta">{{entry.author|default("")}} {{entry.created|xmldatetime}} {{entry.url|hostname}}</div>
+          <div>{{entry.content|local_image}}</div>
         </div>
-        {% endfor %}
+        {%- endfor %}
       </div>
-      {% endfor %}
+      {%- endfor %}
 
-      {% else %}
+      {%- else %}
 
-      {% for entry in book.entries %}
+      {%- for entry in book.entries %}
       <div id="entry-{{entry.uid}}" class="section">
-        <h2>{{entry.title}}</h2>
-        <div class="meta">{{entry.author|default("")}} {{entry.created|xmldatetime}}</div>
-        <div>{{entry.content}}</div>
+        <h2 class="entry-title">{{entry.title}}</h2>
+        <div class="entry-meta">{{entry.author|default("")}} {{entry.created|xmldatetime}}</div>
+        <div>{{entry.content|local_image}}</div>
       </div>
-      {% endfor %}
+      {%- endfor %}
 
-      {% endif %}
+      {%- endif %}
     </div>
   </body>
 </html>

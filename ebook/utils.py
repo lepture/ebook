@@ -1,4 +1,7 @@
+import os
 import datetime
+from jinja2 import Environment, FileSystemLoader
+ROOT = os.path.abspath(os.path.dirname(__file__))
 
 
 def xmldatetime(value):
@@ -15,3 +18,13 @@ def utf8(value):
         return str(value)
     assert isinstance(value, unicode)
     return value.encode('utf-8')
+
+
+def render(template, params):
+    jinja = Environment(
+        loader=FileSystemLoader([os.path.join(ROOT, '_template')]),
+        autoescape=False,
+    )
+    jinja.filters.update({'xmldatetime': xmldatetime})
+    tpl = jinja.get_template(template)
+    return utf8(tpl.render(params))

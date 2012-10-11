@@ -12,7 +12,7 @@
     <navPoint class="{{book.format}}">
       <navLabel><text><![CDATA[{{book.title}}]]></text></navLabel>
       <content src="content.html" />
-      {% if book.format == 'periodical' %}
+      {% if book.periodical %}
       {% for cat in book.categories %}
       <navPoint id="category-{{cat.uid}}" class="section">
         <navLabel><text><![CDATA[{{cat.title|escape}}]]></text></navLabel>

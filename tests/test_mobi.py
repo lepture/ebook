@@ -15,6 +15,7 @@ def test_create():
     ]
     book = Book('test', entries, lang='zh-CN', uid="test-book")
     create(book, 'build/test1')
+    create(book, 'build/test1/hello-world.mobi')
 
 
 def test_periodical():
@@ -25,6 +26,6 @@ def test_periodical():
         Entry('3', '111', category='1'),
         Entry(u'中文', '111', category='2'),
     ]
-    book = Book('test', entries, format='periodical', lang='zh-CN',
+    book = Book('test', entries, periodical=True, lang='zh-CN',
                 uid="test-periodical")
     create(book, 'build/test2')

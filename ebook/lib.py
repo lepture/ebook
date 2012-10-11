@@ -33,14 +33,14 @@ class Category(object):
 
 class Book(object):
     def __init__(self, title, entries, description=None, author='',
-                 format='book', subject=None, lang='en-US', uid=None,
+                 periodical=False, subject=None, lang='en-US', uid=None,
                  created=None, creator='lepture', publisher='ebook'):
         self.title = title
         self.entries = entries
         self.description = description or ''
 
         self.author = author
-        self.format = format
+        self.periodical = periodical
 
         self.subject = subject or title
         self.lang = lang

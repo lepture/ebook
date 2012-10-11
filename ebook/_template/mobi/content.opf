@@ -11,7 +11,7 @@
       <dc:date>{{ book.created|xmldatetime }}</dc:date>
       <dc:description>{{book.description}}</dc:description>
     </dc-metadata>
-    {% if book.format == 'periodical' %}
+    {% if book.periodical %}
     <x-metadata>
       <output encoding="utf-8" content-type="application/x-mobipocket-subscription-magazine"></output>
     </x-metadata>

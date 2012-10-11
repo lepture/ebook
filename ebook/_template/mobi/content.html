@@ -23,7 +23,7 @@
       {% endfor %}
     </ul>
     <div id="content">
-      {% if book.format == 'periodical' %}
+      {% if book.periodical %}
 
       {% for cat in book.categories %}
       <div id="category-{{cat.uid}}">

@@ -26,14 +26,16 @@ def hostname(url):
 
 
 def md5image(link):
-    name = hashlib.md5(link).hexdigest()
-    if link.endswith('.png'):
-        ext = 'png'
-    elif link.endswith('.gif'):
-        ext = 'gif'
-    else:
-        ext = 'jpg'
-    return '%s.%s' % (name, ext)
+    if link.startswith('http://') or link.startswith('https://'):
+        name = hashlib.md5(link).hexdigest()
+        if link.endswith('.png'):
+            ext = 'png'
+        elif link.endswith('.gif'):
+            ext = 'gif'
+        else:
+            ext = 'jpg'
+        return '%s.%s' % (name, ext)
+    return link
 
 
 def local_image(content):
@@ -64,10 +66,11 @@ def download(links, folder):
     monkey.patch_all()
 
     def fetch(folder, link):
-        filename = os.path.join(folder, md5image(link))
-        if os.path.exists(filename):
-            return
-        urllib.urlretrieve(link, filename)
+        if link.startswith('http://') or link.startswith('https://'):
+            filename = os.path.join(folder, md5image(link))
+            if os.path.exists(filename):
+                return
+            urllib.urlretrieve(link, filename)
 
     jobs = [gevent.spawn(fetch, folder, link) for link in links]
     gevent.joinall(jobs)
